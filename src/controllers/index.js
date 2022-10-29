@@ -1,3 +1,5 @@
 const userController = require('./userController');
 
-module.exports = { userController };
+const categoryController = require('./categoryController');
+
+module.exports = { userController, categoryController };
