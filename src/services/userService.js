@@ -1,5 +1,5 @@
 const { User } = require('../models');
-const { token } = require('../utils/token'); 
+const { token } = require('../utils/token');
 
 const validateLoginService = async ({ email, password }) => {
   if (!email || !password) {
@@ -12,4 +12,14 @@ const validateLoginService = async ({ email, password }) => {
   return { type: null, token: token(user) };
 };
 
-module.exports = { validateLoginService };
+const registerNewUserService = async (data) => {
+  const user = await User.findOne({ where: { email: data.email } });
+  if (user) return { type: 'ALREADY_EXISTS', message: 'User already registered' };
+  const newUser = await User.create(data);
+  return { type: null, token: token(newUser) };
+};
+
+module.exports = {
+  validateLoginService,
+  registerNewUserService,
+};
