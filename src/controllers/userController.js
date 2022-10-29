@@ -20,4 +20,10 @@ const getAllUsers = async (_req, res) => {
   return res.status(200).json(response);
 };
 
-module.exports = { validateLogin, registerNewUser, getAllUsers };
+const getUserFromID = async (req, res) => {
+  const response = await userService.getUserFromIDService(req.params.id);
+  if (!response) return res.status(404).json({ message: 'User does not exist' });
+  return res.status(200).json(response);
+};
+
+module.exports = { validateLogin, registerNewUser, getAllUsers, getUserFromID };
