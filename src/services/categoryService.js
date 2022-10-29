@@ -8,4 +8,9 @@ const registerNewCategoryService = async (data) => {
   return { type: null, data: newCategory };
 };
 
-module.exports = { registerNewCategoryService };
+const getAllCategoriesService = async () => {
+  const allCategories = await Category.findAll();
+  return allCategories;
+};
+
+module.exports = { registerNewCategoryService, getAllCategoriesService };
