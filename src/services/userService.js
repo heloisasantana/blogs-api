@@ -19,7 +19,13 @@ const registerNewUserService = async (data) => {
   return { type: null, token: token(newUser) };
 };
 
+const getAllUsersService = async () => {
+  const allUsers = await User.findAll({ attributes: { exclude: ['password'] } });
+  return allUsers;
+};
+
 module.exports = {
   validateLoginService,
   registerNewUserService,
+  getAllUsersService,
 };

@@ -12,4 +12,13 @@ const token = (data) => jwt.sign(
   jwtConfig,
 );
 
-module.exports = { token };
+const jwtTokenVerification = (reqToken) => {
+  try {
+    const { data } = jwt.verify(reqToken, process.env.JWT_SECRET);
+    return { data };
+  } catch (error) {
+    return { error };
+  }
+};
+
+module.exports = { token, jwtTokenVerification };
