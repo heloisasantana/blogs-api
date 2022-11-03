@@ -4,4 +4,6 @@ const userRoutes = require('./userRoutes');
 
 const categoryRoutes = require('./categoryRoutes');
 
-module.exports = { loginRoutes, userRoutes, categoryRoutes };
+const postRoutes = require('./postRoutes');
+
+module.exports = { loginRoutes, userRoutes, categoryRoutes, postRoutes };
