@@ -11,4 +11,10 @@ const getAllPosts = async (_req, res) => {
   return res.status(200).json(response);
 };
 
-module.exports = { registerNewPost, getAllPosts };
+const getPostFromID = async (req, res) => {
+  const response = await postService.getPostFromIDService(req.params.id);
+  if (!response) return res.status(404).json({ message: 'Post does not exist' });
+  return res.status(200).json(response);
+};
+
+module.exports = { registerNewPost, getAllPosts, getPostFromID };

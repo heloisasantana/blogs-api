@@ -22,9 +22,20 @@ const getAllPostsService = async () => {
     include: [
     { model: Category, as: 'categories' },
     { model: User, as: 'user', attributes: { exclude: ['password'] } },
-  ],
+    ],
   });
   return allPosts;
 };
 
-module.exports = { registerNewPostService, getAllPostsService };
+const getPostFromIDService = async (id) => {
+  const post = await BlogPost.findOne({ 
+    where: { id },
+    include: [
+      { model: Category, as: 'categories' },
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+    ],
+  });
+  return post;
+};
+
+module.exports = { registerNewPostService, getAllPostsService, getPostFromIDService };
