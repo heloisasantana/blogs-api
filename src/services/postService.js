@@ -1,4 +1,4 @@
-const { Category, BlogPost, PostCategory } = require('../models');
+const { Category, BlogPost, PostCategory, User } = require('../models');
 
 const registerNewPostService = async ({ title, content, categoryIds }, { id }) => {
   if (!title || !content || !categoryIds) {
@@ -17,4 +17,14 @@ const registerNewPostService = async ({ title, content, categoryIds }, { id }) =
   return { type: null, data: newPost };
 };
 
-module.exports = { registerNewPostService };
+const getAllPostsService = async () => {
+  const allPosts = await BlogPost.findAll({
+    include: [
+    { model: Category, as: 'categories' },
+    { model: User, as: 'user', attributes: { exclude: ['password'] } },
+  ],
+  });
+  return allPosts;
+};
+
+module.exports = { registerNewPostService, getAllPostsService };
